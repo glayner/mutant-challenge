@@ -23,6 +23,7 @@ yarn build
 node dist/shared/infra/http/server.js
 ```
 Tenha atenção para que ao rodar como desenvolvedor a variavel TYPEORM_ENTITIES esteja apontando para "./src/modules/**/infra/typeorm/entities/*.ts", mas se for rodar como em produção ela deve estar: "./dist/modules/**/infra/typeorm/entities/*.js"
+A configuração padrão está para rodar em produção
 
 Para acessar o swagger basta acessar a rota localhost:3000/docs
 
