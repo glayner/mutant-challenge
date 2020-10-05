@@ -26,4 +26,9 @@ Tenha atenção para que ao rodar como desenvolvedor a variavel TYPEORM_ENTITIES
 
 Para acessar o swagger basta acessar a rota localhost:3000/docs
 
+Os testes não cobriram todo o código por conta do tempo mas acredito que cobriu o basico.
+```bash
+yarn test
+```
+
 Pelo fator de tempo não consegui concluir o docker mas segue até onde fiz para se quiser dar uma olhada.
