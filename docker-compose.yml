@@ -1,0 +1,45 @@
+version: '3.8'
+networks:
+  sqlDb:
+    driver: bridge
+volumes:
+  db-volume:
+  api-volume:
+services:
+###############################################################################
+#                             DATABASE MYSQL                                  #
+###############################################################################
+  mysqldb:
+    image: mysql:latest
+    volumes:
+      - db-volume:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=mutant
+    networks:
+      - sqlDb
+    ports:
+      - 3306:3306
+###############################################################################
+#                                   CHALLENGE                                 #
+###############################################################################
+  mutant-challenge:
+    image: glayner/mutant-challenge:latest
+    volumes:
+      - api-volume:/home/node/build/
+    environment:
+      - TYPEORM_CONNECTION=mysql
+      - TYPEORM_HOST=mysqldb
+      - TYPEORM_USERNAME=root
+      - TYPEORM_PASSWORD=password
+      - TYPEORM_DATABASE=mutant
+      - TYPEORM_PORT=3306
+      - TYPEORM_SYNCHRONIZE=true
+      - TYPEORM_LOGGING=false
+      - TYPEORM_ENTITIES=./dist/modules/**/infra/typeorm/entities/*.js
+    networks:
+      - sqlDb
+    ports:
+      - 3000:3000
+    depends_on:
+      - mysqldb
