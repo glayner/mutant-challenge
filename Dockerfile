@@ -30,6 +30,7 @@ USER node
 
 COPY --chown=node:node --from=builder /home/node/build/node_modules ./node_modules
 COPY --chown=node:node --from=builder /home/node/build/process.yml .
+COPY --chown=node:node --from=builder /home/node/build/ormconfig.js .
 COPY --chown=node:node --from=builder /home/node/build/dist .
 
 EXPOSE 3000
